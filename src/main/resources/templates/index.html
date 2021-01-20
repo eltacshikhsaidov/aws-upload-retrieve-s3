@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <form method="POST" enctype="multipart/form-data" action="/">
+        <table>
+            </tr>
+            <tr><td>File to upload:</td><td><input type="file" name="file" /></td>
+            <tr><td>Description of image:</td><td><input type="text" name="description" /></td>
+            </tr>
+            <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+        </table>
+    </form>
+</div>
+
+
+<div th:unless="${fileName == null}">
+    <h1 style="color: red" th:text="${'Successfully uploaded '+ fileName}"></h1>
+</div>
+
+
+<div th:unless="${profiles==null}">
+    <table>
+        <tr>
+            <th>FileName</th>
+            <th>Image</th>
+        </tr>
+
+        <tr th:each="profile : ${profiles}">
+            <td th:text="${profile.fileName}"></td>
+            <td th:text="${profile.description}"></td>
+            <td> <img width="200" height="200" th:src="@{'/get/' +${profile.fileName}} "></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
